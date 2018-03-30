@@ -1,7 +1,8 @@
 # Based on the ideas and concept in this paper:
 # http://www.cad.zju.edu.cn/home/zldong/course/possion/possion2003.pdf
 
-require 'chunky_png'
+# require 'chunky_png'
+require 'oily_png'
 
 class Image
   attr_reader :width,
