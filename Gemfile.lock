@@ -26,6 +26,8 @@ GEM
       pry (~> 0.9)
       yard (~> 0.9)
     rake (10.5.0)
+    rake-compiler (1.0.4)
+      rake
     slop (3.6.0)
     yard (0.9.12)
 
@@ -40,6 +42,7 @@ DEPENDENCIES
   pry-byebug (~> 3.4.2)
   pry-doc
   rake (~> 10.0)
+  rake-compiler
   seamless_cloning!
 
 BUNDLED WITH
