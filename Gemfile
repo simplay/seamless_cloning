@@ -1,8 +1,6 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-# gem 'pry'
-# gem 'pry-byebug'
-# gem 'minitest'
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-# read and write PNG files
-gem 'oily_png'
+# Specify your gem's dependencies in seamless_cloning.gemspec
+gemspec
