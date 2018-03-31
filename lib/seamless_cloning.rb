@@ -1,4 +1,3 @@
-# require 'chunky_png'
 require 'oily_png'
 require "seamless_cloning/gradient_field"
 require "seamless_cloning/image"
@@ -106,3 +105,27 @@ module SeamlessCloning
     puts "Saved image `#{out_filepath}`"
   end
 end
+
+# Reload all files in this GEM excluding this file. Becomes handy when working
+# with pry's edit function.
+#
+# @param filename [String] E.g. 'matrix.rb'
+def reload(filename = nil)
+  warn = $VERBOSE
+  $VERBOSE = nil
+  files = Dir.glob('lib/seamless_cloning/**/*.rb')
+  if filename
+    file = files.find do |f|
+      filename == File.basename(f)
+    end
+    load(file)
+  else
+    files.each { |f| load(f) }
+  end
+  nil
+ensure
+  $VERBOSE = warn
+  true
+end
+
+alias reload! reload
