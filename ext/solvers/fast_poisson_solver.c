@@ -15,6 +15,10 @@ static double get_val(double* ary, int width, int x, int y) {
   return ary[y * width + x];
 }
 
+static void double_copy(double* dst, double* src, int len){
+  memcpy(dst, src, (sizeof(double) * len));
+}
+
 static VALUE solve(VALUE self,
                    VALUE width,
                    VALUE height,
@@ -48,6 +52,8 @@ static VALUE solve(VALUE self,
 
   int m;
   for (m = 0; m < max_iter; m++) {
+    double_copy(c_prev, c_target, len);
+
     for (w = 0; w < c_width; w++) {
       for (h = 0; h < c_height; h++) {
 
@@ -62,11 +68,11 @@ static VALUE solve(VALUE self,
 
         img_neighbors = left + right + top + bottom;
 
-        dvx2 = get_val(c_vx, c_width, w - 1, h);
+        dvx2 = get_val(c_vx, c_width, w    , h - 1);
         dvx1 = get_val(c_vx, c_width, w    , h);
         dvx = dvx2 - dvx1;
 
-        dvy2 = get_val(c_vy, c_width, w    , h - 1);
+        dvy2 = get_val(c_vy, c_width, w - 1, h);
         dvy1 = get_val(c_vy, c_width, w    , h);
         dvy = dvy2 - dvy1;
 
@@ -77,9 +83,6 @@ static VALUE solve(VALUE self,
         c_target[h * c_width + w] = v;
       }
     }
-
-    // make a copy instead of changing references
-    c_prev = c_target;
 
     if (m % 200 == 0) {
       printf("Iteration %i\n", m);
