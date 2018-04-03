@@ -7,5 +7,5 @@ SeamlessCloning.clone(
   source: 'images/monster.png',
   target: 'images/wide_grass.png',
   mask_position: [50, 400],
-  iterations: 5
+  iterations: 100
 )

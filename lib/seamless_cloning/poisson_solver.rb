@@ -26,6 +26,22 @@ module SeamlessCloning
       vx = vectorfield.dx
       vy = vectorfield.dy
 
+      r = FastPoissonSolver.solve(
+        target.width,
+        target.height,
+        max_iterations,
+        target.data,
+        mask.data,
+        vx.data,
+        vy.data
+      )
+      Matrix.new(r, start.width, start.height)
+    end
+
+    def solve_o
+      vx = vectorfield.dx
+      vy = vectorfield.dy
+
       max_iterations.times do |iter|
         previous_out = target
 
@@ -51,11 +67,12 @@ module SeamlessCloning
             dv = (dvx + dvy)
 
             v = (img_neighbors + dv) / 4.0
+
             target[w, h] = v
           end
         end
 
-        puts "Iteration #{iter} / #{max_iterations}" if iter % 10 == 0
+        puts "Iteration #{iter} / #{max_iterations}" if iter % 200 == 0
 
         # error = (target.sum - previous_out.sum).abs
         # break if error < THRESHOLD

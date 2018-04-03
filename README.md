@@ -4,7 +4,7 @@
 
 ```
   bundle
-  rake compile
+  rake clean compile
 ```
 
 ## Usage
