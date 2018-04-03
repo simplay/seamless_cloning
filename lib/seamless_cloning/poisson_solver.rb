@@ -23,6 +23,16 @@ module SeamlessCloning
     end
 
     def solve
+      if ENV['SC_USE_FAST_SOLVER']
+        puts "Using c-extension solver"
+        solve_fast
+      else
+        puts "Using ruby solver"
+        solve_slow
+      end
+    end
+
+    def solve_fast
       vx = vectorfield.dx
       vy = vectorfield.dy
 
@@ -38,7 +48,7 @@ module SeamlessCloning
       Matrix.new(r, start.width, start.height)
     end
 
-    def solve_o
+    def solve_slow
       vx = vectorfield.dx
       vy = vectorfield.dy
 
