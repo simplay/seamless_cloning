@@ -9,9 +9,9 @@
 
 ## Usage
 
-`ruby exe/app.rb`
+Run executable: `exe/cloner`. Get detailed usage information via `exe/cloner -h`.
 
-`bin/console`
+Start an interactive console: `bin/console`
 
 ## License
 

@@ -23,12 +23,10 @@ module SeamlessCloning
     end
 
     def solve
-      if ENV['SC_USE_FAST_SOLVER']
-        puts "Using c-extension solver"
-        solve_fast
-      else
-        puts "Using ruby solver"
+      if ENV['SC_USE_RUBY_SOLVER']
         solve_slow
+      else
+        solve_fast
       end
     end
 
