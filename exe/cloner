@@ -31,7 +31,7 @@ require 'seamless_cloning'
 iterations = options[:iter] || 100_000
 
 puts "Running #{iterations} iterations"
-if ENV['SC_USE_FAST_SOLVER']
+if ENV['SC_USE_RUBY_SOLVER']
   puts "Using ruby solver"
 else
   puts "Using c-extension solver"

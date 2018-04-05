@@ -73,17 +73,17 @@ module SeamlessCloning
             # only visit masked region
             next unless mask[w, h].zero?
 
-            left   = previous_out[w - 1, h]
-            right  = previous_out[w + 1, h]
-            top    = previous_out[w    , h + 1]
-            bottom = previous_out[w    , h - 1]
+            left   = previous_out[w,     h - 1]
+            right  = previous_out[w,     h + 1]
+            top    = previous_out[w + 1, h]
+            bottom = previous_out[w - 1, h]
 
             # image neighborhood contribution
             img_neighbors = left + right + top + bottom
 
             # partial derivatives of vectorfields
-            dvx = vx[w - 1, h] - vx[w, h]
-            dvy = vy[w, h - 1] - vy[w, h]
+            dvx = vx[w,     h - 1] - vx[w, h]
+            dvy = vy[w - 1, h - 1] - vy[w, h]
 
             # total derivative
             dv = (dvx + dvy)
@@ -100,7 +100,8 @@ module SeamlessCloning
         # break if error < THRESHOLD
       end
 
-      target
+      r = clamp(target.data)
+      Matrix.new(r, start.width, start.height)
     end
   end
 end
