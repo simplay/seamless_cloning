@@ -2,6 +2,8 @@
 
 ![alt text](https://github.com/simplay/seamless_cloning/blob/master/doc/result.png "Example output produced after running 2000 iterations")
 
+The implementation of this project is based on [this paper](http://www.cad.zju.edu.cn/home/zldong/course/possion/possion2003.pdf).
+
 ## Installation
 
 ```
