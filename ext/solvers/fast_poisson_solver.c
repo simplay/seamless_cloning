@@ -15,9 +15,12 @@ static double get_val(double* ary, int width, int x, int y) {
   return ary[y * width + x];
 }
 
+// copy values in double array from src to dst
 static void double_copy(double* dst, double* src, int len) {
   memcpy(dst, src, (sizeof(double) * len));
 }
+
+static double MAX_ERROR = 1E-4;
 
 static VALUE solve(VALUE self,
                    VALUE width,
@@ -90,6 +93,12 @@ static VALUE solve(VALUE self,
       }
 
       printf("Iteration %i: Error: %f \n", m, error);
+
+      // Finish computation when max error boundery has been reached.
+      if (error <= MAX_ERROR) {
+        printf("Returning solver result: Error smaller than %f\n", MAX_ERROR);
+        break;
+      }
     }
   }
 

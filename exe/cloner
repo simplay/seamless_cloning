@@ -28,7 +28,7 @@ option_parser.parse!
 
 require 'seamless_cloning'
 
-iterations = options[:iter] || 100
+iterations = options[:iter] || 100_000
 
 puts "Running #{iterations} iterations"
 if ENV['SC_USE_FAST_SOLVER']
