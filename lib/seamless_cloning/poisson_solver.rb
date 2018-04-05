@@ -30,6 +30,18 @@ module SeamlessCloning
       end
     end
 
+    def clamp(data)
+      data.map do |e|
+        if e < 0.0
+          0.0
+        elsif e > 1.0
+          1.0
+        else
+          e
+        end
+      end
+    end
+
     def solve_fast
       vx = vectorfield.dx
       vy = vectorfield.dy
@@ -43,6 +55,8 @@ module SeamlessCloning
         vx.data,
         vy.data
       )
+      r = clamp(r)
+
       Matrix.new(r, start.width, start.height)
     end
 

@@ -15,7 +15,7 @@ static double get_val(double* ary, int width, int x, int y) {
   return ary[y * width + x];
 }
 
-static void double_copy(double* dst, double* src, int len){
+static void double_copy(double* dst, double* src, int len) {
   memcpy(dst, src, (sizeof(double) * len));
 }
 
@@ -42,13 +42,12 @@ static VALUE solve(VALUE self,
   double* c_vx = rb_ary_c_ary(vx, len);
   double* c_vy = rb_ary_c_ary(vy, len);
 
-  // TODO: implement the algorithm
-  int i, w, h;
-
+  int i, w, h, k;
 
   double left, right, top, bottom;
-  double dvx2, dvx1, dvx, dvy2, dvy1, dvy, dv, v;
+  double dvx2, dvx1, dvy2, dvy1, dv, v_tmp;
   double img_neighbors;
+  double error, e_tmp;
 
   int m;
   for (m = 0; m < max_iter; m++) {
@@ -57,7 +56,7 @@ static VALUE solve(VALUE self,
     for (w = 0; w < c_width; w++) {
       for (h = 0; h < c_height; h++) {
 
-        if (get_val(c_mask, c_width, w, h) != 0.0d) {
+        if (get_val(c_mask, c_width, w, h) > 0.0d) {
           continue;
         }
 
@@ -70,22 +69,27 @@ static VALUE solve(VALUE self,
 
         dvx2 = get_val(c_vx, c_width, w    , h - 1);
         dvx1 = get_val(c_vx, c_width, w    , h);
-        dvx = dvx2 - dvx1;
 
         dvy2 = get_val(c_vy, c_width, w - 1, h);
         dvy1 = get_val(c_vy, c_width, w    , h);
-        dvy = dvy2 - dvy1;
 
-        dv = dvx + dvy;
+        dv = dvx2 - dvx1 + dvy2 - dvy1;
 
-        v = (img_neighbors + dv) / 4.0d;
-
-        c_target[h * c_width + w] = v;
+        v_tmp = (img_neighbors + dv) / 4.0;
+        c_target[h * c_width + w] = v_tmp;
       }
     }
 
     if (m % 200 == 0) {
-      printf("Iteration %i\n", m);
+      error = 0.0;
+      for (k = 0; k < len; k++) {
+        e_tmp = c_target[k] - c_prev[k];
+        e_tmp *= e_tmp;
+        e_tmp = sqrt(e_tmp);
+        error += e_tmp;
+      }
+
+      printf("Iteration %i: Error: %f \n", m, error);
     }
   }
 
