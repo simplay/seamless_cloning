@@ -1,6 +1,6 @@
 #include "ruby.h"
 
-static double* rb_ary_c_ary(VALUE ary, int len) {
+static double* rb_ary_c_ary(VALUE ary, long len) {
   double* c_ary = malloc(sizeof(double) * len);
 
   int i;
@@ -16,7 +16,7 @@ static double get_val(double* ary, int width, int x, int y) {
 }
 
 // copy values in double array from src to dst
-static void double_copy(double* dst, double* src, int len) {
+static void double_copy(double* dst, double* src, long len) {
   memcpy(dst, src, (sizeof(double) * len));
 }
 
@@ -31,7 +31,7 @@ static VALUE solve(VALUE self,
                    VALUE vx,
                    VALUE vy) {
 
-  int len = RARRAY_LEN(target);
+  long len = RARRAY_LEN(target);
   int c_width = NUM2INT(width);
   int c_height = NUM2INT(height);
   int max_iter = NUM2INT(iters);
@@ -59,7 +59,7 @@ static VALUE solve(VALUE self,
     for (w = 0; w < c_width; w++) {
       for (h = 0; h < c_height; h++) {
 
-        if (get_val(c_mask, c_width, w, h) > 0.0d) {
+        if (get_val(c_mask, c_width, w, h) > 0.0) {
           continue;
         }
 
