@@ -10,7 +10,8 @@ end
 
 Rake::ExtensionTask.new 'solvers' do |ext|
   ext.name    = 'fast_poisson_solver'
-  ext.lib_dir = 'lib/seamless_cloning'
+  ext.lib_dir = File.join('lib', 'seamless_cloning')
+  ext.config_options = '--with-cflags="-std=c99"'
 end
 
 task :default => :test
