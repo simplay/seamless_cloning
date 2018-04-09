@@ -7,10 +7,7 @@ require "seamless_cloning/matrix"
 require "seamless_cloning/poisson_solver"
 require "seamless_cloning/version"
 
-# Based on the ideas and concept in this paper:
-# http://www.cad.zju.edu.cn/home/zldong/course/possion/possion2003.pdf
 module SeamlessCloning
-
   def self.root
     File.dirname __dir__
   end
@@ -26,7 +23,7 @@ module SeamlessCloning
   def self.clone(source:,
                  target:,
                  mask_position:,
-                 iterations: PossionSolver::MAX_ITERATIONS)
+                 iterations: PoissonSolver::MAX_ITERATIONS)
 
     start_x, start_y = mask_position
 
@@ -64,7 +61,7 @@ module SeamlessCloning
     puts "Seamless-Cloning Example"
 
     puts "Processing red color channel"
-    result_red = PossionSolver.new(
+    result_red = PoissonSolver.new(
       start: img_fit.red,
       target: out.red,
       mask: mask,
@@ -75,7 +72,7 @@ module SeamlessCloning
     puts "red channel processed"
 
     puts "Processing green color channel"
-    result_green = PossionSolver.new(
+    result_green = PoissonSolver.new(
       start: img_fit.green,
       target: out.green,
       mask: mask,
@@ -86,7 +83,7 @@ module SeamlessCloning
     puts "green channel processed"
 
     puts "Processing blue color channel"
-    result_blue = PossionSolver.new(
+    result_blue = PoissonSolver.new(
       start: img_fit.blue,
       target: out.blue,
       mask: mask,

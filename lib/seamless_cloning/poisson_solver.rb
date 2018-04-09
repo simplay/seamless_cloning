@@ -1,5 +1,5 @@
 module SeamlessCloning
-  class PossionSolver
+  class PoissonSolver
     MAX_ITERATIONS = 10_000
     THRESHOLD = 1E-12
 
