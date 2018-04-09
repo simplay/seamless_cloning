@@ -18,11 +18,14 @@ module SeamlessCloning
   #   E.g. "images/wide_grass.png"
   # @param mask_position [Array<Integer>] coordinates (top, left) of mask in
   #   target image, e.g. [50, 400].
+  # @param out_dir [String] path to directory where the generated files are
+  #   saved to. E.g. 'out/'
   # @param iterations [Integer] maximum number of iterations used for running
   #   the poisson solver.
   def self.clone(source:,
                  target:,
                  mask_position:,
+                 out_dir:,
                  iterations: PoissonSolver::MAX_ITERATIONS)
 
     start_x, start_y = mask_position
@@ -99,7 +102,7 @@ module SeamlessCloning
       blue: result_blue
     )
 
-    out_filepath = File.join(root, 'out', 'result.png')
+    out_filepath = File.join(root, out_dir, 'result.png')
     result.to_image(out_filepath)
     puts "Saved image `#{out_filepath}`"
   end
