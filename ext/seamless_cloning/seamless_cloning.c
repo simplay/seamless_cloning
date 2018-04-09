@@ -110,7 +110,7 @@ static VALUE solve(VALUE self,
   return result;
 }
 
-void Init_fast_poisson_solver() {
+void Init_seamless_cloning() {
   VALUE FastPoissonSolver = rb_define_module("FastPoissonSolver");
   rb_define_singleton_method(FastPoissonSolver, "solve", solve, 7);
 }

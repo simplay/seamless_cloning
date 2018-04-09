@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
 
-  spec.extensions = ["ext/solvers/extconf.rb"]
+  spec.extensions = ["ext/seamless_cloning/extconf.rb"]
   spec.require_paths = ["lib", "ext"]
 
   spec.add_development_dependency "bundler", "~> 1.16"

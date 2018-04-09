@@ -1,6 +1,6 @@
 require 'oily_png'
 
-require "seamless_cloning/fast_poisson_solver"
+require "seamless_cloning/seamless_cloning"
 require "seamless_cloning/gradient_field"
 require "seamless_cloning/image"
 require "seamless_cloning/matrix"

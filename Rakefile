@@ -8,8 +8,8 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList["test/**/*_test.rb"]
 end
 
-Rake::ExtensionTask.new 'solvers' do |ext|
-  ext.name    = 'fast_poisson_solver'
+Rake::ExtensionTask.new 'seamless_cloning' do |ext|
+  ext.name    = 'seamless_cloning'
   ext.lib_dir = File.join('lib', 'seamless_cloning')
   ext.config_options = '--with-cflags="-std=c99"'
 end
